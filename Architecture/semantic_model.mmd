@@ -1,0 +1,8 @@
+flowchart LR
+  DS["DimSubscriber | subscriber_id"] --> DL["DimSubscription | subscriber_id"]
+  DS --> FS["FactShopSales | subscriber_id"]
+  DS --> FC["FactComplaints | subscriber_id"]
+  DL --> FR["FactRecharges | subscription_id"]
+  DT["DimDate | Date"] --> FR
+  DT --> FS
+  DT --> FC

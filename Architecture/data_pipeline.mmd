@@ -1,0 +1,7 @@
+flowchart TB
+    S["Five source CSV extracts"] --> P["Power Query | ETL"]
+    P --> Q["Quality checks, standardization & typed columns"]
+    Q --> M["Dimensional semantic model | 3 dimensions + 3 facts"]
+    M --> K["DAX business measures | 24 core KPIs"]
+    K --> R["Power BI | landing page + 5 analytical pages"]
+    R --> I["Business insights, recommendations & decisions"]
