@@ -1,0 +1,6 @@
+Source,Records,Grain,Date_Min,Date_Max,Unmatched_Parent_Records
+Subscribers,114618,subscriber,,,
+Subscriptions,114994,subscription,,,382
+Recharges,118025,recharge,2025-01-01,2026-12-28,3
+Shop Sales,113904,sales record,2026-01-01,2026-06-28,403
+Complaints,105000,complaint,2026-01-01,2026-06-28,338
