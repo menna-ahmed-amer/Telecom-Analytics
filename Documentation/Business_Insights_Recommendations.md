@@ -34,7 +34,7 @@ Cairo, Giza and Alexandria dominate the standardized subscriber geography. Compa
 
 - **50.07%** of complaints fall in the normalized `Network Issue` category. Investigate network issues and prioritize diagnostic analysis by location.
 - **39.75%** of **rated** complaints have a score of 1 or 2; this is not 39.75% of all customers or all complaints.
-- **83.47%** of complaints have ratings; 16.53% do not. Improve response coverage to support more representative analysis.
+- **83.47%** of complaints have ratings; **16.53%** do not. The **average recorded satisfaction is 3.01/5** across rated complaints. Improve response coverage to support more representative analysis.
 - Average recorded `resolution_days` is ~2.00 among records with known numeric values; unknown durations are excluded and there is no confirmed closed-status field.
 
 ## Prioritization
