@@ -2,7 +2,7 @@
 
 **Workflow:** CSV → Power Query → typed/standardized columns → validation flags → dimensional model → DAX measures.
 
-The table below describes the business logic observable in the supplied source datasets and in the confirmed Power BI project. It is **not a verbatim exported Power Query M script**; the source `.pbix` was not available for exporting exact Applied Steps.
+The notes describe transformation intent and source-level validation, not a verbatim export of Power Query M. The final `.pbix` is **included** at `Dashboard/Vodafone_Telecom_Analytics.pbix`. Exact Applied Steps, refresh paths, and DAX dependencies should be inspected in Power BI Desktop before claiming a fully reproduced refresh.
 
 ## 1. Subscribers
 
@@ -73,4 +73,4 @@ The table below describes the business logic observable in the supplied source d
 
 ## Reproduction boundary
 
-Power Query transformations have been described here from project decisions and the original source structure. **The exact M queries, parameters, source paths, and refresh settings are contained in the owner's original `.pbix`, which must be added separately** if public reproducibility is desired.
+Power Query transformations are documented from the project decisions and original sources. **The final `.pbix` is included** in `Dashboard/`. Its exact M queries, parameters and refresh settings can be reviewed in Power BI Desktop; this documentation does **not** claim those steps were independently extracted, executed, or refreshed successfully.
