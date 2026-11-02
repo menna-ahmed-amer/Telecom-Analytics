@@ -29,4 +29,4 @@ Dates in `subscriptions` are line activation timestamps, **not** a history of ea
 
 ## Identifiers and privacy
 
-Customer names and phone-number-like identifiers exist in original source extracts. This repository's distribution package excludes those raw row-level files. If example input is ever published, review its permission and remove identifying fields first.
+Customer-name fields and phone-number-like identifiers exist in the source extracts. **The raw row-level CSVs are included** in `Data/Raw/`. The project owner has stated they may be published, but any reuse or redistribution should independently check permissions and assess privacy. The original source URL and license were not established from the supplied materials.
