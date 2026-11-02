@@ -26,10 +26,10 @@ Dropping orphan records would undercount transaction facts; joining them to inve
 
 | Child source | Unmatched parent IDs (rows) |
 |---|---:|
-| Subscriptions → Subscribers | 382 |
-| Recharges → Subscriptions | 3 |
-| Shop sales → Subscribers | 403 |
-| Complaints → Subscribers | 338 |
+| Subscriptions → Subscribers | 382 (0.33% of subscription rows) |
+| Recharges → Subscriptions | 3 (0.003% of recharge rows) |
+| Shop sales → Subscribers | 403 (0.35% of sales rows) |
+| Complaints → Subscribers | 338 (0.32% of complaint rows) |
 
 ## Why retain missing ratings?
 
@@ -55,4 +55,4 @@ The supplied recharge file includes dates later than the README preparation date
 
 ## Documentation integrity
 
-The repository documents the decisions honestly, separates **observed patterns** from **proven effects**, and distinguishes included files from artifacts that still need to be supplied (notably the `.pbix`).
+The repository distinguishes **observed patterns** from **proven effects**. The final `.pbix` is included in `Dashboard/` and raw CSVs are included in `Data/Raw/`; local Power BI refresh, measure behavior under filters, and source permission for any redistribution require their own checks. The original dataset publisher and license are not documented here.
