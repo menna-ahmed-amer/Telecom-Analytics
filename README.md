@@ -2,8 +2,23 @@
 
 **End-to-End BI Project using Power BI, Power Query (ETL), DAX, and Dimensional Data Modeling**
 
-> **At a glance:** 5 CSV source files · **566,541 total source rows** · **24 core KPIs** · **6 report pages** (Landing Page + 5 analytical pages)
->
+**Author:** Menna Ahmed Amer · [GitHub profile](https://github.com/menna-ahmed-amer)
+
+> **At a glance:** 5 CSV source files · **566,541 total source rows** · **24 documented core KPIs** · **6 report pages** (Landing Page + 5 analytical pages)
+
+### Business KPI Snapshot (source-level, unfiltered)
+
+| KPI | Result | Interpretation |
+|---|---:|---|
+| Active Line Rate | **87.91%** | 101,095 active / 114,994 subscriptions; status snapshot |
+| Net Recharge Value | **15,297,520 EGP** | Signed recharge amounts, including negative entries |
+| Suspended Line Rate | **9.15%** | 10,527 suspended / 114,994 subscriptions |
+| iPhone 15 Pro Share of Modeled Shop Sales Value | **86.83%** | Calculated using unit-price × quantity assumption |
+| Network Issue Share of Complaints | **50.07%** | 52,577 of 105,000 complaint records |
+| Average Satisfaction Score | **3.01 / 5** | Rated complaints only; missing ratings excluded |
+
+**Key findings:** Product-value concentration is high (**86.83%** in one product); **50.07%** of complaints are network-related; and **39.75%** of rated complaints scored **1–2**. These figures describe the supplied source records rather than demonstrated causes or outcomes.
+
 ![Vodafone Telecom Analytics — Landing Page](Screenshots/Landing_Page.png)
 
 **Quick links:** [Power BI Report](Dashboard/Vodafone_Telecom_Analytics.pbix) · [Dashboard Pages](#9-dashboard-pages) · [Data Folder](Data/) · [ETL Documentation](Documentation/Data_Cleaning_ETL.md) · [KPI Dictionary](Documentation/KPI_Dictionary.md) · [DAX Reference](Documentation/DAX_Reference.md) · [Model View](Data_Model/Power_BI_Model_View.png)
@@ -59,7 +74,9 @@ This dashboard was designed to help answer the following:
 
 ## 3. Dataset Description & Data Grain
 
-The project uses five source datasets.
+The project uses five CSV source datasets provided as analysis inputs. **The original publisher/source URL and dataset license are not documented in the supplied materials**, so no external origin or permission terms are invented here. The owner has stated that sharing the data is permitted; because source fields include customer names and phone-number-like identifiers, publication authorization should cover the **row-level files**, not only dashboard aggregates.
+
+The filenames are kept exactly as supplied (including `(1)`) to preserve correspondence with the source manifest and existing Power BI file paths.
 
 | Dataset | Rows | Grain | Primary Key | Main Purpose |
 |---|---:|---|---|---|
@@ -89,7 +106,6 @@ This distinction is essential for building correct KPIs and avoiding misleading 
 | **DAX** | KPI creation and business logic |
 | **CSV Files** | Raw source data |
 | **Markdown / GitHub** | Project documentation and publishing |
-| **ETL** | Data preparation workflow before modeling and reporting |
 
 ### Why These Tools?
 - **Power BI** was the core reporting environment.
@@ -174,7 +190,7 @@ This structure was chosen because it:
 - and makes KPI calculation cleaner.
 
 ### Design Trade-offs
-- Some fact rows do not find parent keys in related dimension tables.
+- A small proportion of child records cannot be matched to their parent lookup. These rows are retained in source-level fact totals; breakdowns filtered through a parent dimension may omit records that have no matching parent. See the quantified unmatched-ID table under [Challenges & Limitations](#11-challenges-trade-offs--limitations).
 - Recharge history covers a longer date range than sales and complaints. As of **2026-11-01**, **9,764 recharge records** are dated after that date (maximum **2026-12-28**); they must not be presented as transactions already completed as of 2026-11-01. Validate the reporting cut-off before presenting a historical performance period.
 - Subscription status is snapshot-style, so historical churn analysis is limited.
 
@@ -247,22 +263,21 @@ Used as a clean entry point for dashboard navigation.
 
 ## 10. Key Insights & Business Recommendations
 
-### High-Level Insights
-- The subscriber base is large and geographically concentrated in a few governorates.
-- Active lines represent the majority of subscriptions, but suspended lines still require attention.
-- Recharge value is distributed across multiple payment methods with a noticeable share of negative transactions.
-- Shop sales value is heavily concentrated in the **iPhone 15 Pro**, indicating product concentration risk.
-- Network-related complaints represent the largest complaint category.
-- Low satisfaction ratings represent a meaningful share of rated complaints.
+### High-Level Insights (source-level, unfiltered)
+- **Subscription status:** **101,095 / 114,994** subscriptions are Active (**87.91%**), while **10,527** are Suspended (**9.15%**). This is a status snapshot, not a churn rate.
+- **Recharge value:** Signed net recharge value is **15,297,520 EGP** versus **16,149,670 EGP** in positive-only entries. **17,043 of 118,025 transactions (14.44%)** have a negative amount; their business meaning has not been established.
+- **Shop sales concentration:** The **iPhone 15 Pro accounts for 86.83%** of **2,000,609,900 EGP** modeled shop sales value. This assumes source amount is a unit price multiplied by quantity, and is **not a profitability measure**.
+- **Complaint categories:** **52,577 of 105,000** complaints (**50.07%**) are categorized as Network Issue after standardization.
+- **Customer satisfaction:** Average recorded satisfaction is **3.01/5**; **39.75%** of *rated* complaints score 1 or 2. Ratings cover **83.47%** of complaints, so missing feedback may bias comparisons.
+- **Geography:** Cairo, Giza and Alexandria account for a large portion of subscribers in the standardized geography; exact proportions depend on geography validation and report filters.
 
 ### Business Recommendations
-1. **Reactivation Focus:** investigate suspended lines and launch targeted reactivation campaigns.
-2. **Geographic Expansion:** focus on underrepresented areas while maintaining service quality in high-volume regions.
-3. **Recharge Risk Control:** review negative recharge transactions and assess payment-channel controls.
-4. **Product Mix Review:** reduce sales concentration risk by analyzing product profitability and inventory exposure.
-5. **Branch Performance Review:** compare branch efficiency, not just sales value.
-6. **Complaint Prioritization:** prioritize network issue investigations and monitor recurring service problems.
-7. **Satisfaction Improvement:** analyze dissatisfaction drivers and improve customer support follow-up.
+1. **Subscription Review:** segment the **10,527 suspended lines (9.15%)** for eligibility and lifecycle analysis before any reactivation campaign.
+2. **Recharge Reconciliation:** classify the **17,043 negative entries (14.44%)** before treating them as refunds or adjustments.
+3. **Product Concentration:** investigate profitability and inventory risk where **86.83%** of modeled shop sales value comes from iPhone 15 Pro; the dataset does not establish margins.
+4. **Network Complaint Prioritization:** examine the drivers and geographic concentration of the **52,577 Network Issue complaints (50.07%)**.
+5. **Feedback Quality:** review the causes of **16.53% missing satisfaction ratings**, and investigate factors associated with the **39.75% low-score rate** among responses.
+6. **Geographic & Branch Efficiency:** normalize sales and complaint rates by relevant customer/traffic denominators before making branch or expansion decisions.
 
 See full page-specific business notes in [Business_Insights_Recommendations.md](Documentation/Business_Insights_Recommendations.md).
 
@@ -272,7 +287,16 @@ See full page-specific business notes in [Business_Insights_Recommendations.md](
 
 This project includes several practical analytical limitations:
 
-- Some records are unmatched across source relationships.
+- Some child records do not match a parent key. The counts and share of their own source table are:
+
+  | Child source → Parent | Unmatched rows | Share of child rows |
+  |---|---:|---:|
+  | Subscriptions → Subscribers | **382** | **0.33%** |
+  | Recharges → Subscriptions | **3** | **0.003%** |
+  | Shop sales → Subscribers | **403** | **0.35%** |
+  | Complaints → Subscribers | **338** | **0.32%** |
+
+  Unmatched records remain in overall fact totals but may not appear under a matched parent category. Avoid interpreting dimensional slices as a complete allocation of source totals.
 - Different functional areas do not share the exact same date coverage.
 - Subscription status reflects a current/state snapshot rather than a historical movement log.
 - Satisfaction-based metrics depend on available ratings only.
@@ -287,7 +311,7 @@ These trade-offs were documented rather than hidden, because transparent analyti
 
 ### Files Included in This Repository
 - Raw CSV source files
-- Final Power BI Desktop report (`Dashboard/Vodafone_Telecom_Analytics.pbix`; add the final `.pbix` before publishing)
+- Final Power BI Desktop report: [Vodafone_Telecom_Analytics.pbix](Dashboard/Vodafone_Telecom_Analytics.pbix) (open with Power BI Desktop).
 - Dashboard screenshots
 - Data model screenshot
 - KPI and DAX documentation
@@ -295,13 +319,13 @@ These trade-offs were documented rather than hidden, because transparent analyti
 
 ### To Explore the Project
 1. Download or clone this repository.
-2. Open `Dashboard/Vodafone_Telecom_Analytics.pbix` in Power BI Desktop after adding the final report file.
+2. Open `Dashboard/Vodafone_Telecom_Analytics.pbix` in Power BI Desktop.
 3. If Power BI asks for source paths, reconnect the files in `Data/Raw/`.
-4. Refresh the data.
-5. Navigate through the report pages and use page slicers where available.
+4. Refresh the data, then review query errors and the relationship model; local refresh has not been independently verified here.
+5. Navigate through the report pages, check slicers and compare KPI outputs with the documented source-level figures.
 
-### Expected `.pbix` Location
-Place your Power BI file here:
+### Included Power BI Report
+The final Power BI report is included at:
 
 ```text
 Dashboard/Vodafone_Telecom_Analytics.pbix
@@ -310,9 +334,8 @@ Dashboard/Vodafone_Telecom_Analytics.pbix
 ### Repository Structure
 
 ```text
-Vodafone-Telecom-Analytics/
+Telecom-Analytics/
 ├── README.md
-├── UPLOAD_CHECKLIST.md
 ├── Dashboard/
 │   ├── README.md
 │   └── Vodafone_Telecom_Analytics.pbix
