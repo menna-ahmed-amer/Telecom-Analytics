@@ -13,11 +13,13 @@ This folder contains the **five original CSV extracts** used for the Power BI an
 
 ## Working with these files
 
-1. Open `Dashboard/Vodafone_Telecom_Analytics.pbix` once it is added.
+1. Open the included report at [`../Dashboard/Vodafone_Telecom_Analytics.pbix`](../Dashboard/Vodafone_Telecom_Analytics.pbix) in Power BI Desktop.
 2. In Power BI Desktop, open **Transform data → Data source settings**.
 3. Update the paths to the CSVs in `Data/Raw/` (the CSVs are included here; relative paths depend on the local environment).
 4. Apply changes and refresh; check query errors, relationship filters and KPI results.
 
 **Keep the raw CSVs unchanged.** Power Query is responsible for cleaning, type conversion and derived fields. Read the [Data Cleaning & ETL notes](../Documentation/Data_Cleaning_ETL.md) for the transformation rationale. No exported Power Query M script is claimed in this repository.
 
-The source tables include name fields and phone-number-like identifiers. The project owner has confirmed publication permission; reviewers should still treat the data responsibly when sharing or repurposing this repository.
+**Data provenance:** The five CSVs were provided as project inputs. The original publisher/source URL and license are **not established in the supplied files**; no claim about their origin or whether the records are simulated is made here.
+
+**Publication and privacy:** Source tables include customer-name fields, phone-number-like identifiers and customer IDs. The project owner has stated these files may be shared, but that statement is not independent verification of source licensing or authorization for downstream redistribution. Anyone reusing the files should independently check the applicable permissions and handle identifiers appropriately.
